@@ -59,6 +59,7 @@ namespace odev
             sqlcom.Parameters.Add("@NumOfPage", SqlDbType.Int).Value = numericUpDown1.Value;
             sqlcom.Parameters.Add("@ShelfNum", SqlDbType.NVarChar).Value = textBox7.Text;
             sqlcom.ExecuteNonQuery();
+            sqlconnect.Close();
             MessageBox.Show("Book Added!");
             this.Close();
         }
