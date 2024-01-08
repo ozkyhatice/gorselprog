@@ -45,7 +45,7 @@ namespace odev
                string.IsNullOrWhiteSpace(textBox3.Text) ||
                string.IsNullOrWhiteSpace(textBox7.Text))
             {
-                MessageBox.Show("Lütfen tüm gerekli alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill out all required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             sqlconnect.Open();
