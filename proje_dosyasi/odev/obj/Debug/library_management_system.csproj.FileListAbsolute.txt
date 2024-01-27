@@ -78,3 +78,9 @@ C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\library_management_s
 C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\library_management_system.csproj.CoreCompileInputs.cache
 C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\odev.exe
 C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\odev.pdb
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\bin\Debug\EntityFramework.dll
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\bin\Debug\EntityFramework.xml
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\library_management_system.csproj.CopyComplete
+C:\Users\PC\Desktop\git_gorsel\proje_dosyasi\odev\obj\Debug\odev.stuBook.resources

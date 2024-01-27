@@ -33,10 +33,15 @@ namespace odev
                 MessageBox.Show("Please fill out all required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (CheckIfIdentificationExists(Convert.ToInt32(textBox1.Text)))
+            {
+                MessageBox.Show("A student with the same Identification already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             sqlconnect.Open();
             SqlCommand sqlcom = new SqlCommand("add_stu", sqlconnect);
             sqlcom.CommandType = CommandType.StoredProcedure;
-            sqlcom.Parameters.Add("@Identification", SqlDbType.NVarChar).Value = textBox1.Text;
+            sqlcom.Parameters.Add("@Identification", SqlDbType.Int).Value = textBox1.Text;
             sqlcom.Parameters.Add("@StudentName", SqlDbType.NVarChar).Value = textBox2.Text;
             sqlcom.Parameters.Add("@Surname", SqlDbType.NVarChar).Value = textBox3.Text;
             sqlcom.Parameters.Add("@EMail", SqlDbType.NVarChar).Value = textBox4.Text;
@@ -46,7 +51,19 @@ namespace odev
             MessageBox.Show("Student Added!");
             this.Close();
         }
-
+        private bool CheckIfIdentificationExists(int identification)
+        {
+            // Aynı kimlik numarasının var olup olmadığını kontrol et
+            using (SqlCommand checkCmd = new SqlCommand("SELECT 1 FROM [dbo].[students] WHERE [Identification] = @Identification", sqlconnect))
+            {
+                checkCmd.Parameters.Add("@Identification", SqlDbType.Int).Value = identification;
+                sqlconnect.Open();
+                SqlDataReader reader = checkCmd.ExecuteReader();
+                bool exists = reader.HasRows;
+                sqlconnect.Close();
+                return exists;
+            }
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace odev
 {
@@ -51,6 +52,16 @@ namespace odev
             else
                 // scrollValue, satır sayısından büyükse
                 dataGridView1.FirstDisplayedScrollingRowIndex = rowCount - 1;
+        }
+
+        private void ViewBook_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

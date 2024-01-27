@@ -104,6 +104,7 @@
             this.Name = "ViewStu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Student";
+            this.Load += new System.EventHandler(this.ViewStu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

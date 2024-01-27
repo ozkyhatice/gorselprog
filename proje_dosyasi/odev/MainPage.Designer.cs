@@ -47,6 +47,7 @@
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -278,6 +279,20 @@
             this.pictureBox9.TabIndex = 17;
             this.pictureBox9.TabStop = false;
             // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(373, 400);
+            this.button8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(175, 44);
+            this.button8.TabIndex = 18;
+            this.button8.Text = "Student\'s Books";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -285,6 +300,7 @@
             this.BackColor = System.Drawing.Color.Sienna;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(936, 484);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
@@ -345,5 +361,6 @@
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Button button8;
     }
 }

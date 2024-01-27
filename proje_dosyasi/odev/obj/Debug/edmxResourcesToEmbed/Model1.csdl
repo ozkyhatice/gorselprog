@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GorselProgramlamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="books">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AuthorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Isbn" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PublicationYear" Type="DateTime" Precision="0" />
+    <Property Name="NumOfPage" Type="Int32" />
+    <Property Name="ShelfNum" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BorrowedBooks" Relationship="GorselProgramlamaModel.FK__BorrowedB__BookI__5EBF139D" FromRole="books" ToRole="BorrowedBooks" />
+  </EntityType>
+  <EntityType Name="students">
+    <Key>
+      <PropertyRef Name="Identification" />
+    </Key>
+    <Property Name="Identification" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StudentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BorrowedBooks" Relationship="GorselProgramlamaModel.FK__BorrowedB__Ident__5DCAEF64" FromRole="students" ToRole="BorrowedBooks" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="GorselProgramlama" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="books" EntityType="Self.books" />
+    <EntitySet Name="students" EntityType="Self.students" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <FunctionImport Name="add_books">
+      <Parameter Name="BookName" Mode="In" Type="String" />
+      <Parameter Name="AuthorName" Mode="In" Type="String" />
+      <Parameter Name="Publisher" Mode="In" Type="String" />
+      <Parameter Name="Isbn" Mode="In" Type="String" />
+      <Parameter Name="PublicationYear" Mode="In" Type="DateTime" />
+      <Parameter Name="NumOfPage" Mode="In" Type="Int32" />
+      <Parameter Name="ShelfNum" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="add_stu">
+      <Parameter Name="Identification" Mode="In" Type="String" />
+      <Parameter Name="StudentName" Mode="In" Type="String" />
+      <Parameter Name="Surname" Mode="In" Type="String" />
+      <Parameter Name="EMail" Mode="In" Type="String" />
+      <Parameter Name="Telephone" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GorselProgramlamaModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GorselProgramlamaModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="view_stu" ReturnType="Collection(GorselProgramlamaModel.view_stu_Result)">
+      <Parameter Name="Identification" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="viewBooks" ReturnType="Collection(GorselProgramlamaModel.viewBooks_Result)">
+      <Parameter Name="BookName" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="BorrowedBooks" EntityType="GorselProgramlamaModel.BorrowedBooks" />
+    <AssociationSet Name="FK__BorrowedB__BookI__5EBF139D" Association="GorselProgramlamaModel.FK__BorrowedB__BookI__5EBF139D">
+      <End Role="books" EntitySet="books" />
+      <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BorrowedB__Ident__5DCAEF64" Association="GorselProgramlamaModel.FK__BorrowedB__Ident__5DCAEF64">
+      <End Role="students" EntitySet="students" />
+      <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="view_stu_Result">
+    <Property Type="String" Name="Identification" Nullable="false" MaxLength="11" />
+    <Property Type="String" Name="StudentName" Nullable="false" />
+    <Property Type="String" Name="Surname" Nullable="false" />
+    <Property Type="String" Name="EMail" Nullable="false" />
+    <Property Type="String" Name="Telephone" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="viewBooks_Result">
+    <Property Type="Int32" Name="BookID" Nullable="false" />
+    <Property Type="String" Name="BookName" Nullable="false" />
+    <Property Type="String" Name="AuthorName" Nullable="false" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Isbn" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="PublicationYear" Nullable="true" />
+    <Property Type="Int32" Name="NumOfPage" Nullable="true" />
+    <Property Type="String" Name="ShelfNum" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <EntityType Name="BorrowedBooks">
+    <Key>
+      <PropertyRef Name="BorrowedBookID" />
+    </Key>
+    <Property Name="BorrowedBookID" Type="Int32" Nullable="false" />
+    <Property Name="Identification" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="BorrowDate" Type="DateTime" Precision="3" />
+    <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="books" Relationship="GorselProgramlamaModel.FK__BorrowedB__BookI__5EBF139D" FromRole="BorrowedBooks" ToRole="books" />
+    <NavigationProperty Name="students" Relationship="GorselProgramlamaModel.FK__BorrowedB__Ident__5DCAEF64" FromRole="BorrowedBooks" ToRole="students" />
+  </EntityType>
+  <Association Name="FK__BorrowedB__BookI__5EBF139D">
+    <End Type="GorselProgramlamaModel.books" Role="books" Multiplicity="0..1" />
+    <End Type="GorselProgramlamaModel.BorrowedBooks" Role="BorrowedBooks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="BorrowedBooks">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BorrowedB__Ident__5DCAEF64">
+    <End Type="GorselProgramlamaModel.students" Role="students" Multiplicity="0..1" />
+    <End Type="GorselProgramlamaModel.BorrowedBooks" Role="BorrowedBooks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="students">
+        <PropertyRef Name="Identification" />
+      </Principal>
+      <Dependent Role="BorrowedBooks">
+        <PropertyRef Name="Identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

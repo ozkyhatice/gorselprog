@@ -78,6 +78,7 @@
             this.label2.Size = new System.Drawing.Size(122, 27);
             this.label2.TabIndex = 4;
             this.label2.Text = "Book Name:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // vScrollBar1
             // 
@@ -104,6 +105,7 @@
             this.Name = "ViewBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Book";
+            this.Load += new System.EventHandler(this.ViewBook_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

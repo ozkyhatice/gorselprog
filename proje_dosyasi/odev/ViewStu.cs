@@ -54,5 +54,10 @@ namespace odev
             else
                 dataGridView1.FirstDisplayedScrollingRowIndex = rowCount - 1;
         }
+
+        private void ViewStu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//DATABSEDE TC PRİMARY OLACAK
+//eKLEME SİLME FONKSİYONLARINA TEKRAR GÖZ AT
 namespace odev
 {
     public partial class MainPage : Form
@@ -78,6 +79,12 @@ namespace odev
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            stuBook stu_book = new stuBook();
+            stu_book.Show();
         }
     }
 }
