@@ -93,30 +93,37 @@ namespace odev
         }
         private void Borrow_Book(int selectedBookID)
         {
+           
             try
             {
                 sqlconnect.Open();
-                if (selectedBookID <= 0)
-                {
-                    MessageBox.Show("Please select a valid book.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+
+                // Öğrenci kimliği TextBox'tan alınır
                 string studentIdentification = textBox1.Text;
+
+                // Eğer öğrenci kimliği boş ise uyarı verilir
                 if (string.IsNullOrWhiteSpace(studentIdentification))
                 {
                     MessageBox.Show("Please enter the student identification.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+
                 DateTime borrowDate = dateTimePicker1.Value;
+
+                // Stok numarasını güncellemek için gerekli olan sorgu
+
+                // BorrowedBooks tablosuna yeni bir kayıt eklenir
                 string insertQuery = "INSERT INTO BorrowedBooks (Identification, BookID, BorrowDate, ReturnDate) VALUES (@Identification, @BookID, @BorrowDate, NULL)";
 
-                using (SqlCommand cmd = new SqlCommand(insertQuery, sqlconnect))
+                using (SqlCommand insertCmd = new SqlCommand(insertQuery, sqlconnect))
                 {
-                    cmd.Parameters.AddWithValue("@Identification", studentIdentification);
-                    cmd.Parameters.AddWithValue("@BookID", selectedBookID);
-                    cmd.Parameters.AddWithValue("@BorrowDate", borrowDate);
+                    // Stok numarasını güncelle
 
-                    cmd.ExecuteNonQuery();
+                    // BorrowedBooks tablosuna yeni bir kayıt ekle
+                    insertCmd.Parameters.AddWithValue("@Identification", studentIdentification);
+                    insertCmd.Parameters.AddWithValue("@BookID", selectedBookID);
+                    insertCmd.Parameters.AddWithValue("@BorrowDate", borrowDate);
+                    insertCmd.ExecuteNonQuery();
                 }
 
                 MessageBox.Show("Book borrowed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

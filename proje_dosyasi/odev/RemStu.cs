@@ -45,20 +45,34 @@ namespace odev
                 // Bağlantıyı aç
                 sqlconnect.Open();
 
-                // Öğrenciyi silme sorgusu
-                SqlCommand removeStudentCommand = new SqlCommand("DELETE FROM students WHERE Identification = @Identification", sqlconnect);
-                removeStudentCommand.Parameters.AddWithValue("@Identification", identificationNumber);
+                // Öğrencinin ödünç aldığı kitapları kontrol et
+                SqlCommand checkBorrowedBooksCommand = new SqlCommand("SELECT COUNT(*) FROM BorrowedBooks WHERE Identification = @Identification AND ReturnDate IS NULL", sqlconnect);
+                checkBorrowedBooksCommand.Parameters.AddWithValue("@Identification", identificationNumber);
 
-                int affectedRows = removeStudentCommand.ExecuteNonQuery();
+                int borrowedBookCount = Convert.ToInt32(checkBorrowedBooksCommand.ExecuteScalar());
 
-                // Eğer en az bir satır etkilendiyse öğrenci silinmiştir
-                if (affectedRows > 0)
+                if (borrowedBookCount > 0)
                 {
-                    MessageBox.Show("Student removed successfully!");
+                    // Eğer öğrencinin ödünç aldığı kitap varsa silme işlemi engellenir
+                    MessageBox.Show("The student has borrowed books. Cannot remove the student.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Student not found or an error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Öğrenciyi silme sorgusu
+                    SqlCommand removeStudentCommand = new SqlCommand("DELETE FROM students WHERE Identification = @Identification", sqlconnect);
+                    removeStudentCommand.Parameters.AddWithValue("@Identification", identificationNumber);
+
+                    int affectedRows = removeStudentCommand.ExecuteNonQuery();
+
+                    // Eğer en az bir satır etkilendiyse öğrenci silinmiştir
+                    if (affectedRows > 0)
+                    {
+                        MessageBox.Show("Student removed successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Student not found or an error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)

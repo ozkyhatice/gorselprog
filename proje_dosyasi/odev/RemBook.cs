@@ -60,19 +60,35 @@ namespace odev
             {
                 sqlconnect.Open();
 
-                SqlCommand removeBookCommand = new SqlCommand("DELETE FROM books WHERE BookID = @BookID", sqlconnect);
-                removeBookCommand.Parameters.AddWithValue("@BookID", selectedBookID);
+                // Ödünç alınan kitapları kontrol et
+                SqlCommand checkBorrowedBooksCommand = new SqlCommand("SELECT COUNT(*) FROM BorrowedBooks WHERE BookID = @BookID AND ReturnDate IS NULL", sqlconnect);
+                checkBorrowedBooksCommand.Parameters.AddWithValue("@BookID", selectedBookID);
 
-                int affectedRows = removeBookCommand.ExecuteNonQuery();
+                int borrowedBookCount = Convert.ToInt32(checkBorrowedBooksCommand.ExecuteScalar());
 
-                if (affectedRows > 0)
+                if (borrowedBookCount > 0)
                 {
-                    MessageBox.Show("Book removed successfully!");
-                listbook();
+                    // Eğer kitap öğrenci tarafından ödünç alınmışsa uyarı ver
+                    MessageBox.Show("The book is currently borrowed by a student. It cannot be removed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                    
                 else
-                    MessageBox.Show("Book not found or an error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    // Kitabı sil
+                    SqlCommand removeBookCommand = new SqlCommand("DELETE FROM books WHERE BookID = @BookID", sqlconnect);
+                    removeBookCommand.Parameters.AddWithValue("@BookID", selectedBookID);
+
+                    int affectedRows = removeBookCommand.ExecuteNonQuery();
+
+                    if (affectedRows > 0)
+                    {
+                        MessageBox.Show("Book removed successfully!");
+                        listbook();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Book not found or an error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {

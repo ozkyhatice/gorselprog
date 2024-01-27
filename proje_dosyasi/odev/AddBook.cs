@@ -58,6 +58,7 @@ namespace odev
             sqlcom.Parameters.Add("@PublicationYear", SqlDbType.Date).Value = dateTimePicker1.Value;
             sqlcom.Parameters.Add("@NumOfPage", SqlDbType.Int).Value = numericUpDown1.Value;
             sqlcom.Parameters.Add("@ShelfNum", SqlDbType.NVarChar).Value = textBox7.Text;
+
             sqlcom.ExecuteNonQuery();
             sqlconnect.Close();
             MessageBox.Show("Book Added!");
@@ -95,6 +96,16 @@ namespace odev
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
         }
